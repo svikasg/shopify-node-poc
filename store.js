@@ -17,12 +17,8 @@ app.post('/webhooks/cart/create', async (req, res) => {
 
     if (hash === hmac) {
         const order = JSON.parse(body.toString());
-        console.log(order);
         const { id } = order;
         const total = order.line_items.map(item => item.price).reduce((a, b) => a + b, 0);
-
-        console.log(total)
-        console.log(id);
 
         pool.query('INSERT INTO cart (id, total) VALUES ($1, $2) RETURNING *', [id, total], (error, results) => {
             if (error) {
