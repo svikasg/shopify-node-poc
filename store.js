@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const getRawBody = require('raw-body');
 const crypto = require('crypto');
-const secretKey = '02234ea9833ddb55c050666b355e7471c5af9ba201a9c6667fb146f99ab307d0';
+const secretKey = process.env.SHOPIFY_WEBHOOK;
 const pool = require('./db');
 
 app.post('/webhooks/cart/create', async (req, res) => {
