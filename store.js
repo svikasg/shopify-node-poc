@@ -3,6 +3,7 @@ const app = express();
 const getRawBody = require('raw-body');
 const crypto = require('crypto');
 const secretKey = '02234ea9833ddb55c050666b355e7471c5af9ba201a9c6667fb146f99ab307d0';
+const pool = require('./db');
 
 app.post('/webhooks/cart/create', async (req, res) => {
     const hmac = req.get('X-Shopify-Hmac-Sha256');
@@ -17,27 +18,18 @@ app.post('/webhooks/cart/create', async (req, res) => {
     if (hash === hmac) {
         const order = JSON.parse(body.toString());
         console.log(order);
-        res.sendStatus(200);
-    } else {
-        console.log('Danger! Not from Shopify!');
-        res.sendStatus(403);
-    }
-});
+        const { id } = order;
+        const total = order.line_items.map(item => item.price).reduce((a, b) => a + b, 0);
 
-app.post('/webhooks/checkout/delete', async (req, res) => {
-    const hmac = req.get('X-Shopify-Hmac-Sha256');
+        console.log(total)
+        console.log(id);
 
-    const body = await getRawBody(req);
-
-    const hash = crypto
-        .createHmac('sha256', secretKey)
-        .update(body, 'utf8', 'hex')
-        .digest('base64');
-
-    if (hash === hmac) {
-        const order = JSON.parse(body.toString());
-        console.log(order);
-        res.sendStatus(200);
+        pool.query('INSERT INTO cart (id, total) VALUES ($1, $2) RETURNING *', [id, total], (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.status(201).send(`Cart information added with ID: ${results.rows[0].id}`)
+        });
     } else {
         console.log('Danger! Not from Shopify!');
         res.sendStatus(403);
