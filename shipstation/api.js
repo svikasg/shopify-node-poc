@@ -25,7 +25,7 @@ const sampleOrderData = {
         "street3": null,
         "city": "Washington",
         "state": "WA",
-        "postalCode": "77777",
+        "postalCode": "98430",
         "country": "US",
         "phone": null,
         "residential": null
@@ -38,7 +38,7 @@ const sampleOrderData = {
         "street3": null,
         "city": "Washington",
         "state": "WA",
-        "postalCode": "77777",
+        "postalCode": "98430",
         "country": "US",
         "phone": null,
         "residential": null
@@ -73,7 +73,8 @@ const sampleOrderData = {
         "value": 10,
         "units": 'ounces',
         "WeightUnits": 1
-    }
+    },
+    "packageCode": "package"
 }
 
 module.exports = {
