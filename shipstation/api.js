@@ -77,7 +77,69 @@ const sampleOrderData = {
     "packageCode": "package"
 }
 
+const wareHouseAData = {
+    "warehouseName": "Ship From Location Warehouse A",
+    "originAddress": {
+        "name": "Warehouse A",
+        "company": "Warehouse A",
+        "street1": "1128 Pano Square",
+        "street2": null,
+        "street3": null,
+        "city": "Las Cruces",
+        "state": "NM",
+        "postalCode": "80012",
+        "country": "US",
+        "phone": "512-111-2222",
+        "residential": false
+    },
+    "returnAddress": null,
+    "isDefault": false
+}
+
+const warehouseBData = {
+    "warehouseName": "Ship From Location Warehouse B",
+    "originAddress": {
+        "name": "Warehouse B",
+        "company": "Warehouse B",
+        "street1": "828 Litus Grove",
+        "street2": null,
+        "street3": null,
+        "city": "Las Cruces",
+        "state": "NM",
+        "postalCode": "80012",
+        "country": "US",
+        "phone": "512-111-2222",
+        "residential": false
+    },
+    "returnAddress": null,
+    "isDefault": false
+}
+
+const orderLabelData = {
+    "carrierCode": "stamps_com",
+    "serviceCode": "usps_priority_mail",
+    "confirmation:": "none",
+    "shipDate": "2024-11-22T00:00:00.0000000",
+    "weight": {
+        "value": 5,
+        "units": "ounces",
+    },
+    "dimensions": {
+        "length": 0,
+        "width": 0,
+        "height": 0,
+        "units": "centimeters"
+    },
+    "insuranceOptions": null,
+    "internationalOptions": null,
+    "advancedOptions": null,
+    "testLabel": true
+};
+
 module.exports = {
     shipStationApi,
-    sampleOrderData
+    sampleOrderData,
+    wareHouseAData,
+    warehouseBData,
+    orderLabelData
 }
