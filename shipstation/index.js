@@ -24,4 +24,3 @@ const createOrderAndLabel = async () => {
         .catch((error) => console.log(error))
 }
 createOrderAndLabel();
-

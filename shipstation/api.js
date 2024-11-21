@@ -1,6 +1,9 @@
 const axios = require('axios');
 const { getAuthToken } = require("./utils/auth");
 
+const date = new Date();
+const tomorrow = new Date(+new Date() + 86400000);
+
 const shipStationApi = axios.create({
     baseURL: "https://ssapi.shipstation.com",
     headers: {
@@ -11,11 +14,11 @@ const shipStationApi = axios.create({
 });
 
 const sampleOrderData = {
-    "orderNumber": new Date().valueOf(),
-    "orderKey": new Date().valueOf().toString(),
-    "orderDate": "2024-11-19T08:46:27.0000000",
-    "paymentDate": "2024-11-19T08:46:27.0000000",
-    "shipByDate": "2024-11-22T00:00:00.0000000",
+    "orderNumber": date.valueOf(),
+    "orderKey": date.valueOf().toString(),
+    "orderDate": date.toISOString(),
+    "paymentDate": date.toISOString(),
+    "shipByDate": tomorrow.toISOString(),
     "orderStatus": "awaiting_shipment",
     "billTo": {
         "name": "The President",
@@ -66,16 +69,10 @@ const sampleOrderData = {
         "fulfillmentSku": null,
         "adjustment": false,
         "upc": "32-65-98",
-        "createDate": "2016-02-16T15:16:53.707",
-        "modifyDate": "2016-02-16T15:16:53.707"
-    }],
-    "weight": {
-        "value": 10,
-        "units": 'ounces',
-        "WeightUnits": 1
-    },
-    "packageCode": "package"
-}
+        "createDate": date.toISOString(),
+        "modifyDate": date.toISOString()
+    }]
+};
 
 const wareHouseAData = {
     "warehouseName": "Ship From Location Warehouse A",
@@ -94,7 +91,7 @@ const wareHouseAData = {
     },
     "returnAddress": null,
     "isDefault": false
-}
+};
 
 const warehouseBData = {
     "warehouseName": "Ship From Location Warehouse B",
@@ -113,21 +110,22 @@ const warehouseBData = {
     },
     "returnAddress": null,
     "isDefault": false
-}
+};
 
 const orderLabelData = {
+    "packageCode": "package",
     "carrierCode": "stamps_com",
     "serviceCode": "usps_priority_mail",
     "confirmation:": "none",
-    "shipDate": "2024-11-22T00:00:00.0000000",
+    "shipDate": tomorrow.toISOString(),
     "weight": {
         "value": 5,
         "units": "ounces",
     },
     "dimensions": {
-        "length": 0,
-        "width": 0,
-        "height": 0,
+        "length": 2.5,
+        "width": 3.4,
+        "height": 6.7,
         "units": "centimeters"
     },
     "insuranceOptions": null,
