@@ -33,4 +33,8 @@ app.post('/webhooks/cart/create', async (req, res) => {
     }
 });
 
-app.listen(port, () => console.log('Shopify BE app listening on port 3000!'))
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+});
+
+app.listen(port, () => console.log(`Shopify BE app listening on port ${port}!`))
