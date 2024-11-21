@@ -3,6 +3,8 @@ const app = express();
 const getRawBody = require('raw-body');
 const crypto = require('crypto');
 const secretKey = '02234ea9833ddb55c050666b355e7471c5af9ba201a9c6667fb146f99ab307d0';
+// const cron = require('node-cron');
+// const { createOrderAndLabel } = require('./shipstation');
 
 app.post('/webhooks/cart/create', async (req, res) => {
     const hmac = req.get('X-Shopify-Hmac-Sha256');
@@ -45,3 +47,9 @@ app.post('/webhooks/checkout/delete', async (req, res) => {
 });
 
 app.listen(3000, () => console.log('Shopify BE app listening on port 3000!'))
+
+// cron.schedule('*/15 * * * *', async () => {
+//     console.log('running a task every 15 minutes');
+
+//     await createOrderAndLabel();
+// });

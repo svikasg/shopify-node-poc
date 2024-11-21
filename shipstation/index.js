@@ -14,7 +14,6 @@ const createWarehouseOrderAndLabel = async () => {
         .then(({ labelData }) => base64ToPDF(labelData, `./shipstation/printed-labels/${Date().valueOf()}.pdf`))
         .catch((error) => console.log(error))
 }
-// createWarehouseOrderAndLabel();
 
 // Create and Order and then create a Label for that Order (Warehouse ID already exists)
 const createOrderAndLabel = async () => {
@@ -23,4 +22,9 @@ const createOrderAndLabel = async () => {
         .then(({ labelData }) => base64ToPDF(labelData, `./shipstation/printed-labels/${Date().valueOf()}.pdf`))
         .catch((error) => console.log(error))
 }
-createOrderAndLabel();
+
+module.exports = {
+    createOrderAndLabel,
+    createWarehouseOrderAndLabel
+}
+
