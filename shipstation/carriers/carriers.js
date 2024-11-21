@@ -1,12 +1,11 @@
 const { shipStationApi } = require("../api");
 
 const listCarriers = async () => {
-    await shipStationApi.get('/carriers')
-        .then(response => {
-            console.log(response.data);
-        }).catch(error => {
-            console.error('Error fetching data', error.response.data);
-        });
+    return shipStationApi.get('/carriers')
+        .then(response => response.data)
+        .catch(error => { throw new Error(error.response.data) });
 }
 
-listCarriers();
+module.exports = {
+    listCarriers
+}

@@ -1,16 +1,11 @@
 const { shipStationApi } = require("../api")
 
-const listPackages = async () => {
-    await shipStationApi.get('/carriers/listpackages', {
-        params: {
-            carrierCode: "stamps_com"
-        }
-    })
-        .then(response => {
-            console.log(response.data);
-        }).catch(error => {
-            console.error('Error fetching data', error.response.data);
-        });
+const listPackages = async (params) => {
+    return shipStationApi.get('/carriers/listpackages', { params })
+        .then(response => response.data)
+        .catch(error => { throw new Error(error.response.data) });
 }
 
-listPackages();
+module.exports = {
+    listPackages
+}

@@ -1,7 +1,7 @@
 const { shipStationApi } = require("../api");
 
 const getWarehouse = async (warehouseId) => {
-    await shipStationApi.get(`/warehouses/${warehouseId}`)
+    return shipStationApi.get(`/warehouses/${warehouseId}`)
         .then(response => response.data)
         .catch(error => { throw new Error(error.response.data) });
 };

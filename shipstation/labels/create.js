@@ -1,9 +1,11 @@
-const { shipStationApi, orderLabelData } = require("../api");
+const { shipStationApi } = require("../api");
 
-const createOrderLabel = async (orderId) => {
-    await shipStationApi.post('/orders/createlabelfororder', JSON.stringify({ ...orderLabelData, orderId }))
+const createOrderLabel = async (orderData) => {
+    return shipStationApi.post('/orders/createlabelfororder', JSON.stringify(orderData))
         .then(response => response.data)
-        .catch(error => { throw new Error(error.response.data) });
+        .catch((error) => console.log(error.response.data));
 }
 
-createOrderLabel(25889713);
+module.exports = {
+    createOrderLabel
+}
