@@ -37,4 +37,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
+// cron.schedule('*/15 * * * *', async () => {
+//     console.log('running a task every 15 minutes');
+
+//     await createOrderAndLabel();
+// });
+
 app.listen(port, () => console.log(`Shopify BE app listening on port ${port}!`))
+
