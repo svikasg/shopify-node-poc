@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const pg = require('pg');
 
 const pool = new pg.Pool({
-    user: 'sgopal',
-    host: 'localhost',
-    database: 'sgopal',
-    password: 'shopify',
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
     port: 5432
 });
 
