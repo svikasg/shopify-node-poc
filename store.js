@@ -20,9 +20,9 @@ app.post('/webhooks/cart/create', async (req, res) => {
     if (hash === hmac) {
         const order = JSON.parse(body.toString());
         const { id } = order;
-        const total = order.line_items.map(item => item.price).reduce((a, b) => a + b, 0);
+        const price = order.line_items.map(item => item.price).reduce((a, b) => a + b, 0);
 
-        pool.query('INSERT INTO cart (id, total) VALUES ($1, $2) RETURNING *', [id, total], (error, results) => {
+        pool.query('INSERT INTO cart (id, price) VALUES ($1, $2) RETURNING *', [id, price], (error, results) => {
             if (error) {
                 throw error
             }
@@ -37,12 +37,6 @@ app.post('/webhooks/cart/create', async (req, res) => {
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
-
-// cron.schedule('*/15 * * * *', async () => {
-//     console.log('running a task every 15 minutes');
-
-//     await createOrderAndLabel();
-// });
 
 app.listen(port, () => console.log(`Shopify BE app listening on port ${port}!`))
 
